@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    credentialsId: 'jenkinsadmin'
+                    credentialsId: 'jenkinsadmin',
                     url: 'https://github.com/praveenap13/CucumberTestNgProject.git'
             }
         }
@@ -28,6 +28,9 @@ pipeline {
 
                 // Publish Cucumber/Extent HTML report if generated
                 publishHTML([
+                allowMissing: false,
+                 alwaysLinkToLastBuild: true,
+                   keepAll: true,
                     reportDir: 'target',
                     reportFiles: 'ExtentReport.html',
                     reportName: 'Extent Report'
