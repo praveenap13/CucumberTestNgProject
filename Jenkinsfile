@@ -24,16 +24,16 @@ pipeline {
         stage('Publish Reports') {
             steps {
                 // Publish TestNG results
-                junit 'target/surefire-reports/testng-results.xml'
+                junit 'target/surefire-reports/emailable-report.html'
 
                 // Publish Cucumber/Extent HTML report if generated
                 publishHTML([
                 allowMissing: false,
                  alwaysLinkToLastBuild: true,
                    keepAll: true,
-                    reportDir: 'target',
+                    reportDir: 'target/extent-reports',
                     reportFiles: 'ExtentReport.html',
-                    reportName: 'Extent Report'
+                    reportName: 'Cucumber Test Results'
                 ])
             }
         }

@@ -8,7 +8,7 @@ public class ExtentManager {
 
         public static ExtentReports getInstance(){
             if(extent == null){
-                ExtentSparkReporter sparkReporter=new ExtentSparkReporter("target/ExtentReport.html");
+                ExtentSparkReporter sparkReporter=new ExtentSparkReporter("target/extent-reports/ExtentReport.html");
                 sparkReporter.config().setDocumentTitle("Automation Test Report");
                 sparkReporter.config().setReportName("Cucumber Test Results");
                 extent = new ExtentReports();
