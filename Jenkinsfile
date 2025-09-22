@@ -24,7 +24,7 @@ pipeline {
         stage('Publish Reports') {
             steps {
                 // Publish TestNG results
-                junit 'target/surefire-reports/emailable-report.html'
+               //   junit 'target/surefire-reports/emailable-report.html'
 
                 // Publish Cucumber/Extent HTML report if generated
                 publishHTML([
