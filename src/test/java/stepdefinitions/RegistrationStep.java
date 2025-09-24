@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import pages.RegistrationPage;
 import utility.DriverFactory;
+import utility.ExtentCucumberAdapter;
 import utility.Hooks;
 
 public class RegistrationStep {
@@ -38,6 +39,7 @@ public class RegistrationStep {
        // Hooks.getTest().info("Validating page titile"+title);
         Assert.assertEquals(title, "Automation Exercise");
         registrationPage.clickOnLoginLink();
+        ExtentCucumberAdapter.log(ExtentCucumberAdapter.STATUS.INFO,"Opened application URL");
     }
 
     @When("I enter {string} and {string} and click on SignUp button")
@@ -52,6 +54,7 @@ public class RegistrationStep {
     @Then("I redirected to registartion page")
     public void i_redirected_to_registartion_page() {
     registrationPage.verifySignupPageTitle();
+    ExtentCucumberAdapter.log(ExtentCucumberAdapter.STATUS.INFO,"Entered valid username & password");
 
     }
     @When("I enter {string} and {string} and click on login button")

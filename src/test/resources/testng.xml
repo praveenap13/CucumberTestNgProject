@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="CucumberSuite" parallel="tests" thread-count="2">
+<suite name="CucumberSuite" >
 
     <test name="CucumberTests">
         <parameter name="browser" value="chrome"/>
@@ -9,3 +9,4 @@
     </test>
 
 </suite>
+

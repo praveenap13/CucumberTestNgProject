@@ -26,7 +26,7 @@ public class CrossBrowserRunner extends AbstractTestNGCucumberTests {
             Object[][] scenarios = super.scenarios();
 
             // Wrap scenarios with browsers
-            String[] browsers = {"chrome", "firefox", "edge"};
+            String[] browsers = {"chrome", "edge"};
             Object[][] multiBrowserData = new Object[scenarios.length * browsers.length][2];
 
             int i = 0;

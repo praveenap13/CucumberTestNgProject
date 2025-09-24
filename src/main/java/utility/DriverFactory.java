@@ -16,17 +16,34 @@ public class DriverFactory {
     public static WebDriver getDriver(){
        return tlDriver.get();
     }
-    //initialize driver
+
+        //initialize driver
     public static WebDriver initDriver(){
-        WebDriver driver =null;
-      String browser= ConfigReader.getProperty("browser");
-        if (browser.equalsIgnoreCase("chrome")) {
-            driver = new ChromeDriver();
-        } else if (browser.equalsIgnoreCase("firefox")) {
-            driver = new FirefoxDriver();
-        } else if (browser.equalsIgnoreCase("edge")) {
-            driver = new EdgeDriver();
+        //Priority order:
+        // 1. Maven Surefire (-Dbrowser=edge -Durl=https://…)
+        // 2. TestNG parameter (set into System.setProperty in TestRunner)
+        // 3. config.properties (fallback)
+
+        String browser = System.getProperty("browser",
+                ConfigReader.getProperty("browser", "chrome"));
+        String url = System.getProperty("url",
+                ConfigReader.getProperty("url", "https://google.com"));
+
+        WebDriver driver;
+
+        switch (browser.toLowerCase()) {
+            case "firefox":
+                driver = new FirefoxDriver();
+                break;
+            case "edge":
+                driver = new EdgeDriver();
+                break;
+            case "chrome":
+            default:
+                driver = new ChromeDriver();
+                break;
         }
+
         tlDriver.set(driver);
         getDriver().manage().window().maximize();
       int waitTime= Integer.parseInt(ConfigReader.getProperty("implicitWait"));
@@ -35,8 +52,10 @@ public class DriverFactory {
     }
 
     public static void quitDriver(){
-        getDriver().quit();
-        tlDriver.remove();
+        if (tlDriver.get() != null) {
+            tlDriver.get().quit();
+            tlDriver.remove();
+        }
     }
 
 }
